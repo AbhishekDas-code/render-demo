@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .count-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Phone Counting Software</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <label for="image">Upload an image:</label>
+                <input type="file" name="image" id="image" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Predict</button>
+        </form>
+
+        {% if original_image %}
+        <div class="image-container mt-5">
+            <div>
+                <h4>Original Image</h4>
+                <img src="{{ url_for('uploaded_file', filename=original_image) }}" alt="Original Image">
+            </div>
+            <div>
+                <h4>Predicted Image</h4>
+                <img src="{{ url_for('predicted_file') }}" alt="Predicted Image">
+            </div>
+        </div>
+        <div class="count-container">
+            <h4>{{ count }} mobile phone(s) detected</h4>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
